@@ -1,0 +1,73 @@
+# Treść zadania
+
+https://students.mimuw.edu.pl/ZSO/PUBLIC-SO/2021-2022/z1_elf/index.html
+
+# Opis rozwiązania
+
+Rozwiązanie składa się z następujących kroków:
+
+- Zmień bitowość wszystkich struktur w pliku.
+- Zamień sekcje RELA na REL
+- Dodaj thunky
+- Zamień sekcje RELA na REL ponownie ponieważ powstają one znów przy dodawaniu thunków
+- Wyczyść zawartość sekcji .note.gnu.property
+
+Rozwiązanie stara się nie zmieniać kolejności symboli, relokacji, stringów i nagłówków sekcji,
+które napotka w pliku, zamiast tego przerabia je delikatnie aby nie stanowiły przeszkody
+w działaniu rozwiązania.
+
+Rozwiązanie do parsowania korzysta z modułów struct i dataclasses z biblioteki
+standardowej zamiast bardziej typowego do takich zastosowań ctypes, ponieważ
+w ten sposób udało się uzyskać bardzo wygodne wypisywanie przy małej ilości dodatkowego kodu
+(wymaga ono Pythona 3.10, stąd nie działa na obrazie qemu, który ma Pythona 3.9).
+
+Przykładowy kawałek debug outputu przy używaniu Pythona 3.10 jest na końcu tego readme.
+Poziom wypisywanego logu można zmieniać w pliku utils.py w funkcji setup_logging, domyślnie
+jest to INFO czyli nie powinno się wypisywać nic, po zmianie na DEBUG zostaną wypisane wszystkie
+struktury końcowego elfa i różne informacje co gdzie wyląduje przy ostatecznym wypisaniu elfa do pliku,
+oraz różne informacje z pwntoolsów dotyczące co i jak zostało zassemblowane.
+
+# Co wykonać przed odpaleniem na obrazie qemu:
+
+sudo apt-get install pip
+pip install pwntools  # do assemblowania
+
+```
+[DEBUG] Section(header=Elf32_Shdr(found_name=b'.rel.rodata.thunkout',
+[DEBUG]                           found_linked_section_name=b'.symtab',
+[DEBUG]                           found_other_linked_section_name=b'.rodata.thunkout',
+[DEBUG]                           sh_name=0xeb,
+[DEBUG]                           sh_type=<SHT.SHT_REL: 9>,
+[DEBUG]                           sh_flags=<SHF.0: 0>,
+[DEBUG]                           sh_addr=0x0,
+[DEBUG]                           sh_offset=0x5a0,
+[DEBUG]                           sh_size=0x20,
+[DEBUG]                           sh_link=0xb,
+[DEBUG]                           sh_info=0x11,
+[DEBUG]                           sh_addralign=0x8,
+[DEBUG]                           sh_entsize=0x8),
+[DEBUG]         content=[Elf32_Rel(found_symbol_name=b'.text.thunkout',
+[DEBUG]                            r_offset=0x0,
+[DEBUG]                            r_info=0xe01,
+[DEBUG]                            r_sym=0xe,
+[DEBUG]                            r_type=<R_386.R_386_32: 1>,
+[DEBUG]                            r_addend=0x18),
+[DEBUG]                  Elf32_Rel(found_symbol_name=b'.text.thunkout',
+[DEBUG]                            r_offset=0x8,
+[DEBUG]                            r_info=0xe01,
+[DEBUG]                            r_sym=0xe,
+[DEBUG]                            r_type=<R_386.R_386_32: 1>,
+[DEBUG]                            r_addend=0x2a),
+[DEBUG]                  Elf32_Rel(found_symbol_name=b'.text.thunkout',
+[DEBUG]                            r_offset=0x10,
+[DEBUG]                            r_info=0xe01,
+[DEBUG]                            r_sym=0xe,
+[DEBUG]                            r_type=<R_386.R_386_32: 1>,
+[DEBUG]                            r_addend=0x51),
+[DEBUG]                  Elf32_Rel(found_symbol_name=b'.text.thunkout',
+[DEBUG]                            r_offset=0x18,
+[DEBUG]                            r_info=0xe01,
+[DEBUG]                            r_sym=0xe,
+[DEBUG]                            r_type=<R_386.R_386_32: 1>,
+[DEBUG]                            r_addend=0x63)])
+```

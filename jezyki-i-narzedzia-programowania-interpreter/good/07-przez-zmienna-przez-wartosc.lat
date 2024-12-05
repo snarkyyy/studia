@@ -1,0 +1,18 @@
+void fun(int& a, int b, string c, string& d) {
+    a = 3;
+    b = 4;
+    c = "zmienione";
+    d = "zmienione";
+}
+
+void main() {
+    int a = 1;
+    int b = 2;
+    string x = "niezmienione x";
+    string y = "niezmienione y";
+    fun(a, b, x, y);
+    printInt(a); // prints 3
+    printInt(b); // prints 2
+    printString(x); // prints "niezmienione x"
+    printString(y); // prints "zmienione"
+}

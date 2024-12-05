@@ -1,0 +1,4 @@
+void main() {
+    int a = 10;
+    printInt(A); // variables are case sensitive
+}

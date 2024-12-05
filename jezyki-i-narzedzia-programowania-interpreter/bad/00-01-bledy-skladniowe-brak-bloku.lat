@@ -1,0 +1,4 @@
+void main() {
+    if (true) // blad skladniowy, bloki wymagaja klamerek
+        printString("hello");
+}

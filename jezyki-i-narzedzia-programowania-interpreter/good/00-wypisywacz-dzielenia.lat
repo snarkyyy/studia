@@ -1,0 +1,226 @@
+# Przykład nietrywialnego programu wykorzystującego
+// dużo różnych funkcjonalności języka.
+
+/* nie ma wbudowanej funkcji printBool, więc trzeba napisać swoją */
+void printBool(boolean doWypisania) {
+    if (doWypisania) {
+        printString("prawda");
+    } else {
+        printString("fałsz");
+    }
+}
+
+
+int odwroc_liczbe(int liczba_do_odwrocenia) {
+    int odwrocona_liczba = 0;
+    while (liczba_do_odwrocenia > 0) {
+        int cyfra = liczba_do_odwrocenia % 10;
+        odwrocona_liczba = odwrocona_liczba * 10 + cyfra;
+        liczba_do_odwrocenia = liczba_do_odwrocenia / 10;
+    }
+    return odwrocona_liczba;
+}
+
+
+// dzielna i dzielnik muszą być dodatnie i mniejsze od miliona
+void wypisz_dzielenie(int dzielna, int dzielnik, boolean rowniez_odwroc) {
+
+    boolean dzielnik_jest_niezerowy = dzielnik != 0;
+    printString("Najpierw sprawdzenie czy dzielnik jest niezerowy:");
+    printBool(dzielnik_jest_niezerowy);
+
+    if (!dzielnik_jest_niezerowy) {
+        error();
+    }
+
+    void wypisz_liczbe_do_miliona(int liczba) {
+
+        if (liczba == 0) {
+            printString("zero");
+            return;
+        }
+
+        void wypisz_liczbe_do_tysiaca(int liczba) {
+            wypisz_setki(liczba / 100);
+            int dziesiatki = liczba % 100;
+            if (dziesiatki / 10 == 1) {
+                wypisz_nascie(dziesiatki);
+            } else {
+                wypisz_dziesiatki(dziesiatki / 10);
+                wypisz_jednosci(dziesiatki % 10);
+            }
+        }
+
+        int tysiace = liczba / 1000;
+
+        if (tysiace == 1) {
+            printString("tysiąc");
+        } else {
+            if ((tysiace % 10) > 1 && (tysiace % 10) < 5) { 
+                wypisz_liczbe_do_tysiaca(tysiace);
+                printString("tysiące");
+            } else {
+                if (tysiace > 2) {
+                    wypisz_liczbe_do_tysiaca(tysiace);
+                    printString("tysięcy");
+                }
+            }
+        }
+
+        wypisz_liczbe_do_tysiaca(liczba % 1000);
+    }
+
+    printString("Należy podzielić:");
+    wypisz_liczbe_do_miliona(dzielna);
+    printString("Przez:");
+    wypisz_liczbe_do_miliona(dzielnik);
+
+    int iloraz = dzielna / dzielnik;
+
+    printString("Wychodzi:");
+    wypisz_liczbe_do_miliona(iloraz);
+
+    if (dzielna % dzielnik != 0) {
+        printString("Z resztą:");
+        wypisz_liczbe_do_miliona(dzielna % dzielnik);
+    }
+
+    if (rowniez_odwroc) {
+        if (dzielna % 10 == 0 || dzielnik % 10 == 0) {
+            printString("Nie moge odwrocic liczby ktora konczy sie zerem");
+            error();
+        }
+        printString("Teraz na odwróconych liczbach");
+        wypisz_dzielenie(odwroc_liczbe(dzielna), odwroc_liczbe(dzielnik), false);
+    }
+}
+
+
+int main() {
+    // liczby muszą być dodatnie i mniejsze od miliona
+    wypisz_dzielenie(123456, 31, true);
+    wypisz_dzielenie(1, 1, false);
+    wypisz_dzielenie(100000, 900000, false);
+
+    return 0;
+}
+
+void wypisz_setki(int setki) {
+    if (setki == 1) {
+        printString("sto");
+    }
+    if (setki == 2) {
+        printString("dwieście");
+    }
+    if (setki == 3) {
+        printString("trzysta");
+    }
+    if (setki == 4) {
+        printString("czterysta");
+    }
+    if (setki == 5) {
+        printString("pięćset");
+    }
+    if (setki == 6) {
+        printString("sześćset");
+    }
+    if (setki == 7) {
+        printString("siedemset");
+    }
+    if (setki == 8) {
+        printString("osiemset");
+    }
+    if (setki == 9) {
+        printString("dziewięćset");
+    }
+}
+
+void wypisz_nascie(int nascie) {
+    if (nascie == 10) {
+        printString("dziesięć");
+    }
+    if (nascie == 11) {
+        printString("jedenaście");
+    }
+    if (nascie == 12) {
+        printString("dwanaście");
+    }
+    if (nascie == 13) {
+        printString("trzynaście");
+    }
+    if (nascie == 14) {
+        printString("czternaście");
+    }
+    if (nascie == 15) {
+        printString("pietnaście");
+    }
+    if (nascie == 16) {
+        printString("szesnaście");
+    }
+    if (nascie == 17) {
+        printString("siedemnaście");
+    }
+    if (nascie == 18) {
+        printString("osiemnaście");
+    }
+    if (nascie == 19) {
+        printString("dziewiętnaście");
+    }
+}
+
+void wypisz_dziesiatki(int dziesiatki) {
+    if (dziesiatki == 2) {
+        printString("dwadzieścia");
+    }
+    if (dziesiatki == 3) {
+        printString("trzydzieści");
+    }
+    if (dziesiatki == 4) {
+        printString("czterdzieści");
+    }
+    if (dziesiatki == 5) {
+        printString("pięćdziesiąt");
+    }
+    if (dziesiatki == 6) {
+        printString("sześćdziesiąt");
+    }
+    if (dziesiatki == 7) {
+        printString("siedzemdziesiąt");
+    }
+    if (dziesiatki == 8) {
+        printString("osiemdziesiąt");
+    }
+    if (dziesiatki == 9) {
+        printString("dziewięćdzesiąt");
+    }
+}
+
+void wypisz_jednosci(int jednosci) {
+    if (jednosci == 1) {
+        printString("jeden");
+    }
+    if (jednosci == 2) {
+        printString("dwa");
+    }
+    if (jednosci == 3) {
+        printString("trzy");
+    }
+    if (jednosci == 4) {
+        printString("cztery");
+    }
+    if (jednosci == 5) {
+        printString("pięć");
+    }
+    if (jednosci == 6) {
+        printString("sześć");
+    }
+    if (jednosci == 7) {
+        printString("siedem");
+    }
+    if (jednosci == 8) {
+        printString("osiem");
+    }
+    if (jednosci == 9) {
+        printString("dziewięć");
+    }
+}

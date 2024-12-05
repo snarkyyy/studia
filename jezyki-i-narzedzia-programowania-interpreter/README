@@ -1,0 +1,76 @@
+ZMIANY WZGLĘDEM WERSJI Z POPRZEDNIEGO TERMINU:
+- Dodanie komentarzy w paru miejscach w kodzie.
+- Nowy przykład good/00-wypisywacz-dzielenia.lat ,
+jest to większy program pokazujący różne aspekty języka.
+
++ Na 15 punktów
++ 01 (trzy typy)
++ 02 (literały, arytmetyka, porównania)
++ 03 (zmienne, przypisanie)
++ 04 (print)
++ 05 (while, if)
++ 06 (funkcje lub procedury, rekurencja)
++ 07 (przez zmienną / przez wartość / in/out)
+  08 (zmienne read-only i pętla for)
++ Na 20 punktów
++ 09 (przesłanianie i statyczne wiązanie)
++ 10 (obsługa błędów wykonania)
++ 11 (funkcje zwracające wartość)
+  Na 30 punktów
++ 12 (4) (statyczne typowanie)
++ 13 (2) (funkcje zagnieżdżone ze statycznym wiązaniem)
+  14 (1/2) (rekordy/listy/tablice/tablice wielowymiarowe)
+  15 (2) (krotki z przypisaniem)
++ 16 (1) (break, continue)
+  17 (4) (funkcje wyższego rzędu, anonimowe, domknięcia)
+  18 (3) (generatory)
+
+Razem: 27
+
+# Opis języka:
+
+Język taki jak bazowe (bez rozszerzeń) Latte z 2022, ale:
+ - bez (post/pre)(de/in)krementacji;
+ - z wymuszaniem bloków w klamerkach w statementach by uniknąć niejednoznaczności
+ - z wymuszaniem inicjalizowania zmiennych przy deklaracji
+ - z przesłanianiem zmiennych nawet w ramach pojedyńczego bloku
+ - z brakiem globalnych zmiennych (w globalnym zakresie mogą być tylko funkcje)
+ - z przekazywaniem argumentów przez wartość (referencje)
+ - z break i continue
+ - z statycznym typowaniem
+ - z zagnieżdżaniem funkcji i statycznym wiązaniem
+
+https://www.mimuw.edu.pl/~ben/Zajecia/Mrj2022/Latte/
+
+# Używanie
+
+Po wykonaniu komendy make powstaje plik wykonywalny interpreter,
+interpreter może zostać wywołany z jednym argumentem będącym plikiem do wykonania,
+albo bez argumentu, wtedy wczyta program do wykonania ze standardowego wejścia.
+
+# Predefiniowane funkcje:
+
+void printInt(int)
+void printString(string)
+void error() // natychmiast kończy wykonanie programu
+
+W deklaracji języka były również funkcje wczytujące dane ze
+standardowego wejścia, nie zostały one ostatecznie zaimplementowane.
+
+# Opis implementacji
+
+W folderze Latte znajdują się pliki wygenerowane narzędziem BNFC przy użyciu pliku Latte.cf.
+(po wygenerowaniu wprowadziłem w nich drobne modyfikacje niezmieniające składni).
+
+Plik Latte.cf to przerobiona gramatyka Latte, którą można znaleźć pod adresem:
+https://www.mimuw.edu.pl/~ben/Zajecia/Mrj2022/Latte/Latte.cf
+
+Wszystkie usunięte reguły są opisane komentarzami, wszystkie nowe reguły również.
+
+W głównym folderze znajdują się pliki Main.hs, Interpret.hs i StaticCheck.hs zawierające całą implementacje.
+Plik Main.hs jest lekko przerobionym plikiem Latte/Test.hs.
+
+# Przykłady
+
+w folderach good/ i bad/ znajdują się przykłady z nazwami plików w formacie (numer funkcjonalności)-opis.lat.
+Przykłady dla których nie ma punktu w tabelce zaczynają się od 00.

@@ -1,0 +1,20 @@
+# blad wykonania
+# wywolanie wbudowanej funkcji powodujacej blad
+
+void main() {
+    void f() {
+        while (true) {
+            printString("This will be printed");
+            if (true) {
+                printString("This will be printed");
+                error();
+                printString("This won't be printed");
+            }
+            printString("This won't be printed");
+        }
+    }
+
+    printString("This will be printed");
+    f();
+    printString("This won't be printed");
+}

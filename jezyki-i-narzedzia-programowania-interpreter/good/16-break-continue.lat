@@ -1,0 +1,29 @@
+void main() {
+    int a = 10;
+    string b = "what";
+    while (true) {
+        a = a - 1;
+        printInt(a);
+        if (a == 6) {
+            break;
+        } else {
+            continue;
+        }
+        a = a + 100;
+    }
+
+    while (a > 0) {
+        a = a - 1;
+        continue;
+        a = a + 10;
+    }
+    printInt(a);
+
+    int a = 10;
+    while (a > 0) {
+        while (true) {break;}
+        printString("After inner break");
+        while (a > 0) {a = 0; continue;}
+        printString("After inner continue");
+    }
+}

@@ -1,0 +1,23 @@
+void main() {
+
+    void f() {
+        printString("hello from function f");
+        void g() {
+            printString("hello from function g");
+        }
+        void h() {
+            g();
+            printString("hello from function h");
+        }
+        void i() {
+            printString("I won't be called");
+        }
+        h();
+    }
+
+    void g() {
+        printString("I'm another function g, I won't be called");
+    }
+
+    f(); 
+}

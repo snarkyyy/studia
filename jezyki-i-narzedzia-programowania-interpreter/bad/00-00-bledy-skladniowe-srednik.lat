@@ -1,0 +1,3 @@
+void main() {
+    int a // blad kazda instrukcja musi konczyc sie srednikiem
+}

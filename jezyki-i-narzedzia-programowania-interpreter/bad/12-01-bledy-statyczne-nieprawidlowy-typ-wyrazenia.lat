@@ -1,0 +1,4 @@
+void main() {
+    int zmienna = 1;
+    zmienna = "text"; // statyczny blad, nieprawidlowy typ wyrazenia
+}

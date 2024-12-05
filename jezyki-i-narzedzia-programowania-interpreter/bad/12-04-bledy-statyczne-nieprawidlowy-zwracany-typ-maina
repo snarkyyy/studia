@@ -1,0 +1,3 @@
+string main() {
+    return "";
+} // main moze zwracac tylko void lub int

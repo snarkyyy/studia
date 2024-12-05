@@ -1,0 +1,11 @@
+void main() {
+    while (true) {
+        if (true) {
+            break; // ten break jest prawidlowy
+        }
+    }
+
+    if (true) {
+        break; // blad statyczny, break poza petla while
+    }
+}

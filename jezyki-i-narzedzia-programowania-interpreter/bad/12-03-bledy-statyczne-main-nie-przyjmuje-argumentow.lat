@@ -1,0 +1,2 @@
+
+void main(int a) {} // statyczny blad, main nie moze przyjmowac argumentow

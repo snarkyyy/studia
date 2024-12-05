@@ -1,0 +1,28 @@
+void main() {
+    printInt(foo(2, false, "ff"));
+    printString(str());
+    printBool(bol());
+}
+
+int foo(int a, boolean b, string c) {
+    printInt(a);
+    printBool(b);
+    printString(c);
+    return 10;
+}
+
+string str() {
+    return "string";
+}
+
+boolean bol() {
+    return true;
+}
+
+void printBool(boolean toPrint) {
+    if (toPrint) {
+        printString("true");
+    } else {
+        printString("false");
+    }
+}

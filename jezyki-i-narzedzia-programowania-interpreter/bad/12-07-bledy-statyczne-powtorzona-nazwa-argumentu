@@ -1,0 +1,2 @@
+void f(int a, string b, boolean a) {} // blad statyczny: powtorzona nazwa argumentu
+void main() {}

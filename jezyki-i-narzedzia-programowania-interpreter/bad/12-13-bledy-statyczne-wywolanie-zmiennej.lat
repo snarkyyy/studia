@@ -1,0 +1,6 @@
+void f(){}
+
+void main() {
+    int f = 0;
+    f(); // blad statyczny, wywolanie zmiennej
+}

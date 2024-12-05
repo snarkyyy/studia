@@ -1,0 +1,169 @@
+-- programs ------------------------------------------------
+
+entrypoints Program ;
+
+-- Commented out: change TopDef to FnDef because there can be nesting
+-- Program.   Program ::= [TopDef] ;
+-- FnDef.	   TopDef ::= Type Ident "(" [Arg] ")" Block ;
+-- separator nonempty TopDef "" ;
+
+-- Added:
+Program.   Program ::= [FnDef] ;
+
+-- Added:
+FnDef.	   FnDef ::= Type Ident "(" [Arg] ")" Block ;
+
+separator nonempty FnDef "" ;
+
+-- Added: argument taken "by reference"
+ArgRef.    Arg ::= Type "&" Ident ;
+
+Arg. 	   Arg ::= Type Ident ;
+
+separator  Arg "," ;
+
+-- statements ----------------------------------------------
+
+Block.     Block ::= "{" [Stmt] "}" ;
+
+separator  Stmt "" ;
+
+Empty.     Stmt ::= ";" ;
+
+BStmt.     Stmt ::= Block ;
+
+Decl.      Stmt ::= Type [Item] ";" ;
+
+-- Commented out:
+-- NoInit.    Item ::= Ident ; 
+
+Init.      Item ::= Ident "=" Expr ;
+
+separator nonempty Item "," ;
+
+Ass.       Stmt ::= Ident "=" Expr  ";" ;
+
+-- Commented out:
+-- Incr.      Stmt ::= Ident "++"  ";" ;
+-- Decr.      Stmt ::= Ident "--"  ";" ;
+
+Ret.       Stmt ::= "return" Expr ";" ;
+
+VRet.      Stmt ::= "return" ";" ;
+
+-- Commented out: force blocks to prevent ambiguities
+-- Cond.      Stmt ::= "if" "(" Expr ")" Stmt  ;
+-- CondElse.  Stmt ::= "if" "(" Expr ")" Stmt "else" Stmt  ;
+-- While.     Stmt ::= "while" "(" Expr ")" Stmt ;
+
+-- Added:
+Cond.         Stmt ::= "if" "(" Expr ")" Block  ;
+
+-- Added:
+CondElse.     Stmt ::= "if" "(" Expr ")" Block "else" Block  ;
+
+-- Added:
+While.        Stmt ::= "while" "(" Expr ")" Block ;
+
+SExp.      Stmt ::= Expr  ";" ;
+
+-- Added:
+Break.     Stmt ::= "break" ";" ;
+
+-- Added:
+Continue.  Stmt ::= "continue" ";" ;
+
+-- Added: allow function nesting
+InnerFnDef. Stmt ::= FnDef ;
+
+-- Types ---------------------------------------------------
+
+Int.       Type ::= "int" ;
+
+Str.       Type ::= "string" ;
+
+Bool.      Type ::= "boolean" ;
+
+Void.      Type ::= "void" ;
+
+-- Commented out: we need to express references
+-- internal   Fun. Type ::= Type "(" [Type] ")" ;
+
+-- Added:
+ArgType.  ArgType ::= Type ;
+
+-- Added:
+ArgTypeRef.  ArgType ::= Type "&" ;
+
+-- Added: 
+internal   Fun.  Type ::= Type "(" [ArgType] ")" ;
+
+-- Added:
+separator  ArgType "," ;
+
+separator  Type "," ;
+
+
+-- Expressions ---------------------------------------------
+
+EVar.      Expr6 ::= Ident ;
+
+ELitInt.   Expr6 ::= Integer ;
+
+ELitTrue.  Expr6 ::= "true" ;
+
+ELitFalse. Expr6 ::= "false" ;
+
+EApp.      Expr6 ::= Ident "(" [Expr] ")" ;
+
+EString.   Expr6 ::= String ;
+
+Neg.       Expr5 ::= "-" Expr6 ;
+
+Not.       Expr5 ::= "!" Expr6 ;
+
+EMul.      Expr4 ::= Expr4 MulOp Expr5 ;
+
+EAdd.      Expr3 ::= Expr3 AddOp Expr4 ;
+
+ERel.      Expr2 ::= Expr2 RelOp Expr3 ;
+
+EAnd.      Expr1 ::= Expr2 "&&" Expr1 ;
+
+EOr.       Expr ::= Expr1 "||" Expr ;
+
+coercions  Expr 6 ;
+
+separator  Expr "," ;
+
+-- operators -----------------------------------------------
+
+Plus.      AddOp ::= "+" ;
+
+Minus.     AddOp ::= "-" ;
+
+Times.     MulOp ::= "*" ;
+
+Div.       MulOp ::= "/" ;
+
+Mod.       MulOp ::= "%" ;
+
+LTH.       RelOp ::= "<" ;
+
+LE.        RelOp ::= "<=" ;
+
+GTH.       RelOp ::= ">" ;
+
+GE.        RelOp ::= ">=" ;
+
+EQU.       RelOp ::= "==" ;
+
+NE.        RelOp ::= "!=" ;
+
+-- comments ------------------------------------------------
+
+comment    "#" ;
+
+comment    "//" ;
+
+comment    "/*" "*/" ;

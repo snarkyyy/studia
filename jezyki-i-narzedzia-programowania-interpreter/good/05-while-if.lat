@@ -1,0 +1,16 @@
+void main() {
+    int a = 10;
+    while (a > 0) {
+        a = a - 1;
+        printInt(a);
+    }
+    if (a != 0) {
+        printString("Error! a is not equal to zero");
+        error();
+    } else {
+        printString("a is equal to zero as expected");
+    }
+    if (a == 0) {
+        printString("simple if also found that a is equal to zero");
+    }
+}

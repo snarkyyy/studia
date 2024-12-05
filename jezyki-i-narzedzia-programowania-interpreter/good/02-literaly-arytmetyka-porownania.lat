@@ -1,0 +1,44 @@
+void main() {
+    printString("2 + 7 =");
+    printInt(2 + 7);
+    printString("3 - 7 =");
+    printInt(3 - 7);
+    printString("12 * 2 =");
+    printInt(12 * 2);
+    printString("12 / 2 =");
+    printInt(12 / 2);
+    printString("12 % 5 =");
+    printInt(12 % 5);
+    printString("1 < 2 =");
+    printBool(1 < 2);
+    printString("1 <= 1 =");
+    printBool(1 <= 1);
+    printString("2 > 2 =");
+    printBool(2 > 2);
+    printString("1 >= 7 =");
+    printBool(1 >= 7);
+    printString("3652 == 3652 =");
+    printBool(3652 == 3652);
+    printString("1 != 2 =");
+    printBool(1 != 2);
+    printString("int a = 10;");
+    int a = 10;
+    printString("-a =");
+    printInt(-a);
+    printString("!false =");
+    printBool(!false);
+    printString("false && true");
+    printBool(false && true);
+    printString("false || true");
+    printBool(false || true);
+    printString("(a < 12) && (((3 + 2) > 9) || (8 < 10))");
+    printBool((a < 12) && (((3 + 2) > 9) || (8 < 10)));
+}
+
+void printBool(boolean toPrint) {
+    if (toPrint) {
+        printString("true");
+    } else {
+        printString("false");
+    }
+}

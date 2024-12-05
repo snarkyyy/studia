@@ -1,0 +1,49 @@
+
+// rekurencja
+int fib(int n) {
+    if (n == 0) {
+        return 0;
+    } else { if (n == 1) {
+        return 1;
+    } }
+    return fib(n - 1) + fib(n - 2);
+}
+
+// Funkcje zdefiniowane w zakresie globalnym widzą siebie nawzajem.
+// (co nie jest prawdą jeśli chodzi o funkcje zagnieżdzone)
+// Dzięki temu można zaimplementować wzajemną rekurencje.
+
+// wzajemna rekurencja
+void funOdd(int n) {
+    printString("I will print odd number");
+    printInt(n);
+    funEven(n - 1);
+}
+
+void funEven(int n) {
+    printString("I will print even number");
+    printInt(n);
+    if (n > 0) {
+        funOdd(n - 1);
+    }
+}
+
+void fun() {
+    printString("I'm the global fun");
+}
+
+void main() {
+    printInt(fib(20));
+    funEven(10);
+
+    fun(); // executes global fun
+    void fun(int n) { // shadows the global fun
+        if (n > 0) {
+            printString("n > 0");
+            fun(0); // recursive call, global fun is shadowed
+        } else {
+            printString("n == 0");
+        }
+    }
+    fun(1); // executes local fun
+}

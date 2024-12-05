@@ -1,0 +1,4 @@
+void main() {
+    printInt(10);
+    printString("string");
+}

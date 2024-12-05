@@ -1,0 +1,25 @@
+void g() {
+}
+
+int f(int a) {
+    if (a > 0) {
+        return 10;
+    } else {
+        return 15;
+    }
+    return 0; // wykonanie nie dojdzie do tego miejsca ale funkcja musi sie konczyc returnem
+}
+
+int h(int a) {
+    if (a > 0) {
+        return 10;
+    } else {
+        return 15;
+    }
+    // statyczny blad, ta funkcja musi sie konczyc returnem
+}
+
+void main() {
+    g(); // funkcja zwracajaca void nie musi sie konczyc returnem
+    f();
+}

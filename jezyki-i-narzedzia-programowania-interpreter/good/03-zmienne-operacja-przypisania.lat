@@ -1,0 +1,19 @@
+void main() {
+    int a = 10;
+    a = 2;
+    printInt(a);
+    string c = "fff";
+    c = "aaa";
+    printString(c);
+    boolean b = false;
+    b = true;
+    printBool(b);
+}
+
+void printBool(boolean toPrint) {
+    if (toPrint) {
+        printString("true");
+    } else {
+        printString("false");
+    }
+}

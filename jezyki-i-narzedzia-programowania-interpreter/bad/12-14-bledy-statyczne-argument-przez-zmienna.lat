@@ -1,0 +1,9 @@
+void f(int a, int& b) {
+}
+
+int main() {
+    int c = 10;
+    f(2, c);
+    f(c, 2);
+    return 0;
+}

@@ -1,0 +1,4 @@
+int main() { 
+    return;  // blad statyczny, funkcja powinna zwracaj int
+    return 2; 
+}

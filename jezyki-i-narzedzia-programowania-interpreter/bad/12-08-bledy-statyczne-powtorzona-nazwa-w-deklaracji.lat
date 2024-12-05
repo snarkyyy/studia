@@ -1,0 +1,3 @@
+void main() {
+    int a = 10, b = 3, a = 5; // blad statyczny: powtorzona nazwa zmiennej w jednej deklaracji
+}

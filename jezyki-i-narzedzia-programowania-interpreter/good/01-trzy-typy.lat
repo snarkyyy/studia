@@ -1,0 +1,16 @@
+# One type of comment.
+// Other Type of comment.
+/* Yet another type of comment. */
+
+int main() {
+    int a = 10;
+    boolean b = true;
+    string c = "some string";
+    if (b) {
+        printInt(a);
+        printString(c);
+    } else {
+        error();
+    }
+    return 0;
+}

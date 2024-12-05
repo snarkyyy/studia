@@ -1,0 +1,55 @@
+void fun() {
+    printString("hello from global scope function");
+}
+
+void main() {
+    int a = 0;
+    {
+        int a = 2; // shadows the other 'a' variable
+        printInt(a); // prints 2
+        a = 10;
+        printInt(a); // prints 10
+    }
+    printInt(a); // prints 0
+
+    void fun() { // shadows the global fun
+        printString("hello from inner scope function");
+    }
+
+    fun(); // calls the inner scope function
+
+    {
+        printInt(5); // prints 5
+        void printInt(int a) { // shadows the builtin function
+            printString("I shadowed printInt function");
+        }
+        printInt(5); // executes the shadowing function
+
+    }
+
+    printInt(6); // prints 6 as now printInt is back to normal
+
+    boolean a = false; // redefine as another type, from now on 'a' is bool
+
+    if (a) {
+    } else {
+        a = true;
+    }
+
+    if (a) {
+        printString("'a' variable is now equal to true");
+    }
+
+    int b = 10;
+
+    void accessB() {
+        b = b + 1;
+        printInt(b);
+    }
+
+    int b = 12; // 'b' redefined, shadows the previous 'b', accessB will access previous 'b' though
+
+    accessB(); // prints 11 
+    accessB(); // prints 12
+    accessB(); // prints 13
+}

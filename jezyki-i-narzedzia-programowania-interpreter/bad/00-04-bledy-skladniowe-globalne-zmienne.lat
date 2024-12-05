@@ -1,0 +1,2 @@
+int a = 10; // blad skladniowy, w zakresie globalnym moga byc tylko funkcje
+void main() {}

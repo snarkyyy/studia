@@ -1,0 +1,3 @@
+cargo:rerun-if-changed=build/main.rs
+cargo:rustc-env=TYPENUM_BUILD_CONSTS=/home/vsyl/Desktop/studia/systemy-rozproszone-atomic-disk-drive/target/debug/build/typenum-a62ae2d9780d9ce4/out/consts.rs
+cargo:rustc-env=TYPENUM_BUILD_OP=/home/vsyl/Desktop/studia/systemy-rozproszone-atomic-disk-drive/target/debug/build/typenum-a62ae2d9780d9ce4/out/op.rs
